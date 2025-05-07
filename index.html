@@ -43,7 +43,10 @@
     }
 
     .link-button {
-      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
       background-color: #222;
       color: white;
       padding: 14px 20px;
@@ -55,47 +58,71 @@
       transition: background-color 0.3s ease;
     }
 
+    .link-button img {
+      width: 24px;
+      height: 24px;
+    }
+
     .link-button:hover {
       background-color: var(--warna-primer);
     }
 
-    .gallery {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 20px;
-      margin-top: 30px;
+    .slider {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      margin: 30px 0;
     }
 
-    .gallery-item {
-      background-color: #1a1a1a;
-      border-radius: 10px;
-      padding: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    .slide-track {
+      display: flex;
+      transition: transform 0.4s ease-in-out;
     }
 
-    .gallery-item img {
+    .slide {
+      min-width: 100%;
+      box-sizing: border-box;
+    }
+
+    .slide img {
       width: 100%;
-      height: 150px;
+      height: 400px;
       object-fit: cover;
       border-radius: 8px;
     }
 
-    .gallery-item p {
-      margin-top: 8px;
+    .slide p {
       font-size: 0.9em;
+      margin-top: 5px;
       color: #ccc;
+    }
+
+    .slider-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.3);
+      border: none;
+      color: white;
+      font-size: 24px;
+      padding: 10px;
+      cursor: pointer;
+      z-index: 2;
+      border-radius: 50%;
+    }
+
+    .prev {
+      left: 10px;
+    }
+
+    .next {
+      right: 10px;
     }
 
     footer {
       font-size: 0.75em;
       margin: 40px 0 10px;
       color: #888;
-    }
-
-    @media(min-width: 600px) {
-      .gallery {
-        grid-template-columns: repeat(2, 1fr);
-      }
     }
   </style>
 </head>
@@ -104,30 +131,59 @@
     <img src="logo font hitam.png" alt="Logo Mahesta" class="logo" />
     <h1>MAHESTA</h1>
 
-    <!-- Link sosial -->
-    <a href="https://whatsapp.com/channel/0029Vb3zOVrICVffWuuW662o" class="link-button" target="_blank">📢 WhatsApp Channel</a>
-    <a href="https://www.tiktok.com/@mahesta.16?lang=id-ID&is_from_webapp=1&sender_device=mobile&sender_web_id=7501625255963166209e" class="link-button" target="_blank">🎵 TikTok</a>
-    <a href="https://www.instagram.com/mahesta.16?igsh=MTQ0dW9pZW13cDZ3aw==" class="link-button" target="_blank">📸 Instagram</a>
+    <a href="https://whatsapp.com/channel/0029Vb3zOVrICVffWuuW662o" class="link-button" target="_blank">
+      <img src="logo-wa.png" alt="WhatsApp" /> WhatsApp Channel
+    </a>
+    <a href="https://www.tiktok.com/@mahesta.16?lang=id-ID&is_from_webapp=1&sender_device=mobile&sender_web_id=7501625255963166209e" class="link-button" target="_blank">
+      <img src="logo-tiktok.png" alt="TikTok" /> TikTok
+    </a>
+    <a href="https://www.instagram.com/mahesta.16?igsh=MTQ0dW9pZW13cDZ3aw==" class="link-button" target="_blank">
+      <img src="logo-ig.png" alt="Instagram" /> Instagram
+    </a>
 
-    <!-- Galeri kegiatan -->
-    <div class="gallery">
-      <div class="gallery-item">
-        <img src="IMG-20250308-WA0006.jpg" alt="Kegiatan 1" />
-        <p>Membangunkan Sahur di bulan Ramadhan</p>
+    <h2>👥 Kepengurusan</h2>
+    <div class="slider" id="slider-kepengurusan">
+      <button class="slider-button prev" onclick="moveSlide('kepengurusan', -1)">&#10094;</button>
+      <div class="slide-track" id="track-kepengurusan">
+        <div class="slide"><img src="coming-soon.png" alt="Coming Soon" /><p>Coming Soon</p></div>
+        <div class="slide"><img src="coming-soon.png" alt="Coming Soon" /><p>Coming Soon</p></div>
       </div>
-      <div class="gallery-item">
-        <img src="IMG-20250315-WA0008.jpg" alt="Kegiatan 2" />
-        <p>Rapat Rutin setiap Sebulan Sekali</p>
+      <button class="slider-button next" onclick="moveSlide('kepengurusan', 1)">&#10095;</button>
+    </div>
+
+    <h2>📷 Galeri Kegiatan</h2>
+    <div class="slider" id="slider-galeri">
+      <button class="slider-button prev" onclick="moveSlide('galeri', -1)">&#10094;</button>
+      <div class="slide-track" id="track-galeri">
+        <div class="slide"><img src="IMG-20250308-WA0006.jpg" alt="Kegiatan 1" /><p>Membangunkan Sahur di bulan Ramadhan</p></div>
+        <div class="slide"><img src="IMG-20250315-WA0008.jpg" alt="Kegiatan 2" /><p>Rapat Rutin setiap Sebulan Sekali</p></div>
+        <div class="slide"><img src="IMG-20250327-WA0001.jpg" alt="Kegiatan 3" /><p>Buka Bersama</p></div>
       </div>
-      <div class="gallery-item">
-        <img src="IMG-20250327-WA0001.jpg" alt="Kegiatan 3" />
-        <p>Buka Bersama</p>
-      </div>
+      <button class="slider-button next" onclick="moveSlide('galeri', 1)">&#10095;</button>
     </div>
 
     <footer>
       &copy; 2025 MAHESTA - Muda Harapan Enam Belas Trini Utara
     </footer>
   </div>
+
+  <script>
+    const sliders = {
+      galeri: { index: 0, track: null },
+      kepengurusan: { index: 0, track: null }
+    };
+
+    window.onload = () => {
+      sliders.galeri.track = document.getElementById('track-galeri');
+      sliders.kepengurusan.track = document.getElementById('track-kepengurusan');
+    };
+
+    function moveSlide(id, direction) {
+      const slider = sliders[id];
+      const total = slider.track.children.length;
+      slider.index = (slider.index + direction + total) % total;
+      slider.track.style.transform = `translateX(-${slider.index * 100}%)`;
+    }
+  </script>
 </body>
 </html>
